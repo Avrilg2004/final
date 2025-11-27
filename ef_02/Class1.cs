@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ef_02
 {
-    internal class Class1
+    public class Class1
     {
         public static void LimpiarZonaInterna()
         {
@@ -200,5 +200,84 @@ namespace ef_02
             }
         }
 
+        public static void SubmenuReportes()
+        {
+            string[] submenu = { "CLIENTES","PRODUCTOS", "VENDEDORES", "PROVEEDORES", "BOLETAS","FACTURAS","GUIAS","PROFORMAS" };
+            int index = 0;
+            ConsoleKeyInfo key;
+
+            do
+            {
+                LimpiarZonaInterna();
+
+                for (int i = 0; i < submenu.Length; i++)
+                {
+                    Console.SetCursorPosition(10, 6 + i);
+
+                    if (i == index)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine(" " + submenu[i]);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine("  " + submenu[i]);
+                    }
+                }
+
+                key = Console.ReadKey(true);
+
+                if (key.Key == ConsoleKey.DownArrow)
+                    index = (index + 1) % submenu.Length;
+
+                if (key.Key == ConsoleKey.UpArrow)
+                    index = (index - 1 + submenu.Length) % submenu.Length;
+
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    if (index == submenu.Length - 1)  // VOLVER
+                        return;
+
+                    // Cuando escoja un elemento
+                    LimpiarZonaInterna();
+
+                    Console.SetCursorPosition(0, 10);
+
+                    switch (index)
+                    {
+                        case 0:
+                            menu.productos();
+                            break;
+
+                        case 1:
+                            menu.clientes();
+                            break;
+
+                        case 2:
+                            menu.Listar();
+                            break;
+
+                        case 3:
+                            menu.proveedores();
+                            break;
+
+                        case 5:
+                            menu.proveedores();
+                            break;
+
+                        case 6:
+                            menu.productos();
+                            break;
+
+                        case 7:
+                            menu.clientes();
+                            break;
+                    }
+                }
+
+            } while (true);
+        }
     }
 }

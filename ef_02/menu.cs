@@ -24,89 +24,266 @@ namespace ef_02
         static string[] telefonos = new string[50];
         static int total = 0;
 
-        
+        //Arreglos para productos
+        public static string[] codigos_producto = new string[50];
+        public static string[] nombres_producto = new string[50];
+        public static string[] categorias_producto = new string[50];
+        public static int[] stocks_producto = new int[50];
+        public static double[] precios_producto = new double[50];
+        public static int totalProductos = 0;
+
+
+
         public static void productos()
         {
-            string[] codigos = new string[50];
-            string[] nombres = new string[50];
-            string[] categorias = new string[50];
-            int[] stocks = new int[50];
-            double[] precios = new double[50];
+            string opcion;
 
-            int totalProductos = 0;
-
-            string continuar;
-
-            
-            do 
+            do
             {
+                // Limpia la zona interna
                 for (int y = 5; y < 29; y++)
                 {
                     Console.SetCursorPosition(1, y);
                     Console.Write(new string(' ', 101));
                 }
-                Console.SetCursorPosition(5, 7);
-                Console.WriteLine("** REGISTRAR PRODUCTO **");
-                Console.SetCursorPosition(5, 8);
-                Console.Write("Ingrese el código: ");
-                string codigo = Console.ReadLine();
 
-                for (int i = 0; i < totalProductos; i++)
+                // Verifica límite
+                if (totalProductos >= 50)
                 {
-                    if (codigos[i] == codigo)
+                    Console.SetCursorPosition(5, 7);
+                    Console.WriteLine("Error: Límite de 50 productos alcanzado");
+                    Console.SetCursorPosition(5, 8);
+                    Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    return;
+                }
+
+                Console.SetCursorPosition(5, 6);
+                Console.Write("REGISTRAR PRODUCTO");
+
+                // ====== CÓDIGO (único) ======
+                string codigo;
+                bool valido;
+                do
+                {
+                    for (int y = 8; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+
+                    Console.SetCursorPosition(5, 8);
+                    Console.Write("Código: ");
+                    codigo = Console.ReadLine();
+                    valido = true;
+
+                    // Validar que no esté vacío
+                    if (codigo.Length == 0)
                     {
                         Console.SetCursorPosition(5, 9);
-                        Console.WriteLine("\nERROR: El código ya existe.");
-                        return;
+                        Console.WriteLine("Error: El código no puede estar vacío");
+                        Console.SetCursorPosition(5, 10);
+                        Console.WriteLine("Presione Enter para intentar de nuevo...");
+                        Console.ReadKey();
+                        valido = false;
+                        continue;
                     }
-                }
 
-                Console.SetCursorPosition(5, 9);
-                Console.Write("Ingrese el nombre: ");
-                string nombre = Console.ReadLine();
+                    // Validar que no exista
+                    for (int i = 0; i < totalProductos; i++)
+                    {
+                        if (codigos_producto[i] == codigo)
+                        {
+                            Console.SetCursorPosition(5, 9);
+                            Console.WriteLine("Error: El código ya existe");
+                            Console.SetCursorPosition(5, 10);
+                            Console.WriteLine("Presione Enter para intentar de nuevo...");
+                            Console.ReadKey();
+                            valido = false;
+                            break;
+                        }
+                    }
+                } while (!valido);
 
-                for (int i = 0; i < totalProductos; i++)
+                // ====== NOMBRE (único) ======
+                string nombre;
+                do
                 {
-                    if (nombres[i].ToLower() == nombre.ToLower())
+                    for (int y = 9; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+
+                    Console.SetCursorPosition(5, 8);
+                    Console.Write("Código: " + codigo);
+                    Console.SetCursorPosition(5, 9);
+                    Console.Write("Nombre: ");
+                    nombre = Console.ReadLine();
+                    valido = true;
+
+                    // Validar que no esté vacío
+                    if (nombre.Length == 0)
                     {
                         Console.SetCursorPosition(5, 10);
-                        Console.WriteLine("\nERROR: Ese nombre ya existe.");
-                        return;
+                        Console.WriteLine("Error: El nombre no puede estar vacío");
+                        Console.SetCursorPosition(5, 11);
+                        Console.WriteLine("Presione Enter para intentar de nuevo...");
+                        Console.ReadKey();
+                        valido = false;
+                        continue;
                     }
+
+                    // Validar que no exista (sin importar mayúsculas/minúsculas)
+                    for (int i = 0; i < totalProductos; i++)
+                    {
+                        if (nombres_producto[i].ToLower() == nombre.ToLower())
+                        {
+                            Console.SetCursorPosition(5, 10);
+                            Console.WriteLine("Error: Ese nombre ya existe");
+                            Console.SetCursorPosition(5, 11);
+                            Console.WriteLine("Presione Enter para intentar de nuevo...");
+                            Console.ReadKey();
+                            valido = false;
+                            break;
+                        }
+                    }
+                } while (!valido);
+
+                // ====== CATEGORÍA ======
+                for (int y = 10; y < 29; y++)
+                {
+                    Console.SetCursorPosition(1, y);
+                    Console.Write(new string(' ', 101));
                 }
+                Console.SetCursorPosition(5, 8);
+                Console.Write("Código: " + codigo);
+                Console.SetCursorPosition(5, 9);
+                Console.Write("Nombre: " + nombre);
                 Console.SetCursorPosition(5, 10);
-                Console.Write("Ingrese la categoría: ");
+                Console.Write("Categoría: ");
                 string categoria = Console.ReadLine();
-                Console.SetCursorPosition(5, 11);
-                Console.Write("Ingrese el stock: ");
-                int stock = int.Parse(Console.ReadLine());
-                Console.SetCursorPosition(5, 12);
-                Console.Write("Ingrese el precio unitario: ");
-                double precio = double.Parse(Console.ReadLine());
 
-                codigos[totalProductos] = codigo;
-                nombres[totalProductos] = nombre;
-                categorias[totalProductos] = categoria;
-                stocks[totalProductos] = stock;
-                precios[totalProductos] = precio;
+                // ====== STOCK ======
+                int stock = 0;
+                do
+                {
+                    for (int y = 11; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+                    Console.SetCursorPosition(5, 8);
+                    Console.Write("Código: " + codigo);
+                    Console.SetCursorPosition(5, 9);
+                    Console.Write("Nombre: " + nombre);
+                    Console.SetCursorPosition(5, 10);
+                    Console.Write("Categoría: " + categoria);
+                    Console.SetCursorPosition(5, 11);
+                    Console.Write("Stock: ");
 
+                    try
+                    {
+                        stock = int.Parse(Console.ReadLine());
+
+                        if (stock < 0)
+                        {
+                            Console.SetCursorPosition(5, 12);
+                            Console.WriteLine("Error: El stock debe ser un número positivo");
+                            Console.SetCursorPosition(5, 13);
+                            Console.WriteLine("Presione Enter para intentar de nuevo...");
+                            Console.ReadKey();
+                            valido = false;
+                        }
+                        else
+                        {
+                            valido = true;
+                        }
+                    }
+                    catch
+                    {
+                        Console.SetCursorPosition(5, 12);
+                        Console.WriteLine("Error: El stock debe ser un número positivo");
+                        Console.SetCursorPosition(5, 13);
+                        Console.WriteLine("Presione Enter para intentar de nuevo...");
+                        Console.ReadKey();
+                        valido = false;
+                    }
+                } while (!valido);
+
+                // ====== PRECIO ======
+                double precio = 0;
+                do
+                {
+                    for (int y = 12; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+                    Console.SetCursorPosition(5, 8);
+                    Console.Write("Código: " + codigo);
+                    Console.SetCursorPosition(5, 9);
+                    Console.Write("Nombre: " + nombre);
+                    Console.SetCursorPosition(5, 10);
+                    Console.Write("Categoría: " + categoria);
+                    Console.SetCursorPosition(5, 11);
+                    Console.Write("Stock: " + stock);
+                    Console.SetCursorPosition(5, 12);
+                    Console.Write("Precio unitario: ");
+
+                    try
+                    {
+                        precio = double.Parse(Console.ReadLine());
+
+                        if (precio <= 0)
+                        {
+                            Console.SetCursorPosition(5, 13);
+                            Console.WriteLine("Error: El precio debe ser un número mayor a 0");
+                            Console.SetCursorPosition(5, 14);
+                            Console.WriteLine("Presione Enter para intentar de nuevo...");
+                            Console.ReadKey();
+                            valido = false;
+                        }
+                        else
+                        {
+                            valido = true;
+                        }
+                    }
+                    catch
+                    {
+                        Console.SetCursorPosition(5, 13);
+                        Console.WriteLine("Error: El precio debe ser un número mayor a 0");
+                        Console.SetCursorPosition(5, 14);
+                        Console.WriteLine("Presione Enter para intentar de nuevo...");
+                        Console.ReadKey();
+                        valido = false;
+                    }
+                } while (!valido);
+
+                // ====== GUARDAR PRODUCTO ======
+                codigos_producto[totalProductos] = codigo;
+                nombres_producto[totalProductos] = nombre;
+                categorias_producto[totalProductos] = categoria;
+                stocks_producto[totalProductos] = stock;
+                precios_producto[totalProductos] = precio;
                 totalProductos++;
-                Console.SetCursorPosition(5, 13);
-                Console.Write("Producto registrado correctamente.");
-                Console.SetCursorPosition(5, 14);
-                Console.Write("¿Desea registrar otro producto? (s/n): ");
-                continuar = Console.ReadLine().ToLower();
 
-                if (continuar != "s") 
+                Console.SetCursorPosition(5, 14);
+                Console.Write("Producto registrado correctamente.");
+                Console.SetCursorPosition(5, 15);
+                Console.Write("¿Desea registrar otro producto? (s/n): ");
+                opcion = Console.ReadLine().ToLower();
+
+                if (opcion != "s")
                 {
                     Console.SetCursorPosition(5, 16);
-                    Console.WriteLine("Presione cualquier tecla para continuar... ");
+                    Console.WriteLine("Presione cualquier tecla para continuar...");
                     Console.ReadKey();
                 }
-                
-            } while (continuar == "s");
+
+            } while (opcion == "s");
         }
-        
+
 
         public static void clientes()
         {
@@ -167,7 +344,6 @@ namespace ef_02
                 } while (!valido);
 
 
-
                 do
                 {
                     for (int y = 5; y < 29; y++)
@@ -177,7 +353,7 @@ namespace ef_02
                     }
 
                     Console.SetCursorPosition(5, 6);
-                    Console.Write("REGISTRAR CLIENTES");
+                    Console.Write("REGISTRAR VENDEDOR");
                     Console.SetCursorPosition(5, 7);
                     Console.Write("Teléfono (9 dígitos): ");
                     telefono = Console.ReadLine();
@@ -187,10 +363,10 @@ namespace ef_02
                     if (!SoloNumeros(telefono))
                     {
                         Console.SetCursorPosition(5, 8);
-                        Console.WriteLine("Error: El teléfono solo debe contener números");
+                        Console.Write("Error: El teléfono solo debe contener números");
                         Console.SetCursorPosition(5, 9);
-                        Console.WriteLine("Presione Enter para intentar de nuevo...");
-                        Console.ReadLine();
+                        Console.Write("Presione Enter para intentar de nuevo...");
+                        Console.ReadKey();
                         valido = false;
                         continue;
                     }
@@ -199,37 +375,85 @@ namespace ef_02
                     if (telefono.Length != 9)
                     {
                         Console.SetCursorPosition(5, 8);
-                        Console.WriteLine("Error: El teléfono debe tener exactamente 9 dígitos");
+                        Console.Write("Error: El teléfono debe tener exactamente 9 dígitos");
                         Console.SetCursorPosition(5, 9);
-                        Console.WriteLine("Presione Enter para intentar de nuevo...");
-                        Console.ReadLine();
+                        Console.Write("Presione Enter para intentar de nuevo...");
+                        Console.ReadKey();
                         valido = false;
                     }
+
+                    for (int i = 0; i < telefono_cliente.Length; i++)
+                    {
+                        if (telefono_cliente[i] == telefono)
+                        {
+                            Console.SetCursorPosition(5, 8);
+                            Console.Write("El teléfono ya existe.");
+                            Console.ReadKey();
+                            valido = false;
+                            break;
+                        }
+                    }
+
                 } while (!valido);
 
 
-                for (int y = 5; y < 29; y++)
+                bool emailValido;
+                do
                 {
-                    Console.SetCursorPosition(1, y);
-                    Console.Write(new string(' ', 101));
-                }
-                Console.SetCursorPosition(5, 6);
-                Console.Write("REGISTRAR CLIENTES");
-                Console.SetCursorPosition(5, 7);
-                Console.Write("EMAIL: ");
-                email = Console.ReadLine();
+                    emailValido = true;
 
+                    for (int y = 5; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+                    Console.SetCursorPosition(5, 6);
+                    Console.Write("REGISTRAR CLIENTES");
+                    Console.SetCursorPosition(5, 7);
+                    Console.Write("EMAIL: ");
+                    email = Console.ReadLine();
+                    for (int i = 0; i < email_cliente.Length; i++)
+                    {
+                        if (email_cliente[i] == email)
+                        {
+                            Console.SetCursorPosition(5, 8);
+                            Console.Write("El email ya existe.");
+                            Console.ReadKey();
+                            emailValido = false;
+                            break;
+                        }
+                    }
 
-                for (int y = 5; y < 29; y++)
+                } while (!emailValido);
+
+                bool direccionValida;
+                do
                 {
-                    Console.SetCursorPosition(1, y);
-                    Console.Write(new string(' ', 101));
-                }
-                Console.SetCursorPosition(5, 6);
-                Console.Write("REGISTRAR CLIENTES");
-                Console.SetCursorPosition(5, 7);
-                Console.Write("DIRECCIÓN: ");
-                direccion = Console.ReadLine();
+                    direccionValida = true;
+                    for (int y = 5; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+                    Console.SetCursorPosition(5, 6);
+                    Console.Write("REGISTRAR CLIENTES");
+                    Console.SetCursorPosition(5, 7);
+                    Console.Write("DIRECCIÓN: ");
+                    direccion = Console.ReadLine();
+
+                    for (int i = 0; i < direccion_cliente.Length; i++)
+                    {
+                        if (direccion_cliente[i] == direccion)
+                        {
+                            Console.SetCursorPosition(5, 8);
+                            Console.Write("La dirección ya existe.");
+                            Console.ReadKey();
+                            direccionValida = false;
+                            break;
+                        }
+                    }
+
+                } while (!direccionValida);
 
                 do
                 {
@@ -302,7 +526,7 @@ namespace ef_02
                 {
 
                     Console.SetCursorPosition(5, 12);
-                    Console.Write("Presione ESC para volver al menu principal...");
+                    Console.Write("Presione enter para volver al menu principal...");
                     Console.ReadLine();
                 }
             } while (opcion == "s");
@@ -310,7 +534,7 @@ namespace ef_02
         public static void vendedores()
         {
             string opcion;
-            ConsoleKey tecla;
+            
             do
             {
                 for (int y = 5; y < 29; y++)
@@ -509,6 +733,21 @@ namespace ef_02
                         Console.ReadKey();
                         valido = false;
                     }
+
+                    for (int i = 0; i < total; i++)
+                    {
+                        if (telefonos[i] == tel)
+                        {
+                            Console.SetCursorPosition(5, 10);
+                            Console.WriteLine("Error: El teléfono ya existe");
+                            Console.SetCursorPosition(5, 11);
+                            Console.WriteLine("Presione Enter para intentar de nuevo...");
+                            Console.ReadKey();
+                            valido = false;
+                            break;
+                        }
+                    }
+
                 } while (!valido);
 
                 // Guardar
@@ -529,7 +768,7 @@ namespace ef_02
                 {
                     
                     Console.SetCursorPosition(5, 12);
-                    Console.Write("Presione ESC para volver al menu principal...");
+                    Console.Write("Presione enter para volver al menu principal...");
                     Console.ReadLine();
                 }
 
@@ -735,6 +974,7 @@ namespace ef_02
             Console.WriteLine("Vendedor registrado!");
         }
 
+
         static bool SoloLetras(string texto)
         {
             if (string.IsNullOrEmpty(texto)) return false;
@@ -759,49 +999,68 @@ namespace ef_02
             return true;
         }
 
-        static void Listar()
+        public static void Listar()
         {
-            Console.WriteLine("\n--- LISTA DE VENDEDORES ---");
+            Console.SetCursorPosition(5, 6);
+            Console.WriteLine("LISTA DE VENDEDORES");
 
             if (total == 0)
             {
-                Console.WriteLine("No hay vendedores registrados");
+                Console.SetCursorPosition(5, 7);
+                Console.Write("No hay vendedores registrados");
                 return;
             }
 
             for (int i = 0; i < total; i++)
             {
-                Console.WriteLine($"\nVendedor {i + 1}:");
-                Console.WriteLine($"Código: {codigos[i]}");
-                Console.WriteLine($"Nombres: {nombres[i]}");
-                Console.WriteLine($"Apellidos: {apellidos[i]}");
-                Console.WriteLine($"Sueldo: ${sueldos[i]}");
-                Console.WriteLine($"Teléfono: {telefonos[i]}");
+                Console.SetCursorPosition(5, 7);
+                Console.Write($"Vendedor {i + 1}:");
+                Console.SetCursorPosition(5, 8);
+                Console.Write($"Código: {codigos[i]}");
+                Console.SetCursorPosition(5, 9);
+                Console.Write($"Nombres: {nombres[i]}");
+                Console.SetCursorPosition(5, 10);
+                Console.Write($"Apellidos: {apellidos[i]}");
+                Console.SetCursorPosition(5, 11);
+                Console.Write($"Sueldo: ${sueldos[i]}");
+                Console.SetCursorPosition(5, 12);
+                Console.Write($"Teléfono: {telefonos[i]}");
             }
         }
 
-        static void Buscar()
+        public static void BuscarVendedor()
         {
-            Console.WriteLine("\n--- BUSCAR VENDEDOR ---");
+            Console.SetCursorPosition(5, 6);
+            Console.Write("BUSCAR VENDEDOR");
+            Console.SetCursorPosition(5, 7);
             Console.Write("Código a buscar: ");
             string codigo = Console.ReadLine();
+
+            if (total == 0)
+            {
+                Console.SetCursorPosition(5, 8);
+                Console.Write("No hay vendedores registrados");
+            }
 
             for (int i = 0; i < total; i++)
             {
                 if (codigos[i] == codigo)
                 {
-                    Console.WriteLine("\nVendedor encontrado:");
-                    Console.WriteLine($"Código: {codigos[i]}");
-                    Console.WriteLine($"Nombre: {nombres[i]} {apellidos[i]}");
-                    Console.WriteLine($"Sueldo: ${sueldos[i]}");
-                    Console.WriteLine($"Teléfono: {telefonos[i]}");
-                    return;
+                    Console.SetCursorPosition(5, 8);
+                    Console.Write("Vendedor encontrado:");
+                    Console.SetCursorPosition(5, 9);
+                    Console.Write($"Código: {codigos[i]}");
+                    Console.SetCursorPosition(5, 10);
+                    Console.Write($"Nombre: {nombres[i]} {apellidos[i]}");
+                    Console.SetCursorPosition(5, 11);
+                    Console.Write($"Sueldo: {sueldos[i]}");
+                    Console.SetCursorPosition(5, 12);
+                    Console.Write($"Teléfono: {telefonos[i]}");
                 }
             }
-
-            Console.WriteLine("Vendedor no encontrado");
         }
-        public static void proveedores()
+
+        public static void provedor()
         {
 
         }

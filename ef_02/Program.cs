@@ -23,21 +23,19 @@ namespace ef_02
 
                 // Limpiar solo la zona de contenido (dentro del cuadro)
                 Class1.LimpiarZona(5, 28);
-
                 Console.SetCursorPosition(10, 10);
 
                 switch (opc)
                 {
                     case 0:
                         Class1.SubmenuRegistrar();
-
                         menu.productos();
-
                         break;
-                    case 1:                   
+                    case 1:  
+                        
                         break;
-
                     case 2:
+                        Class1.SubmenuReportes();
 
                         break;
 
@@ -50,6 +48,13 @@ namespace ef_02
                         break;
 
                     case 5:
+                        for (int y = 5; y < 29; y++)
+                        {
+                            Console.SetCursorPosition(1, y);
+                            Console.Write(new string(' ', 101));
+                        }
+                        Console.SetCursorPosition(10, 10);
+                        Console.Write("SALISTE DEL PROGRAMA MUCHAS GRACIAS POR SU INTERACCIÓN");
                         break;
                 }
 
