@@ -29,43 +29,33 @@ namespace ef_02
                 switch (opc)
                 {
                     case 0:
-                        Console.WriteLine("UWUS1");
                         Class1.SubmenuRegistrar();
-                        menu.productos();
-                        Console.ReadKey();
-                        break;
 
-                    case 1:
-                        Console.WriteLine("UWUS2");                    
-                        Console.ReadKey();
+                        menu.productos();
+
+                        break;
+                    case 1:                   
                         break;
 
                     case 2:
-                        Console.WriteLine("UWUS3");                       
-                        Console.ReadKey();
+
                         break;
 
                     case 3:
-                        Console.WriteLine("UWUS4");
-                        Console.ReadKey();
+
                         break;
 
                     case 4:
-                        Console.WriteLine("UWUS5");
-                        Console.ReadKey();
+
                         break;
 
                     case 5:
-                        Console.WriteLine("UWUS6");
-                        Console.ReadKey();
                         break;
                 }
 
             } while (opc != 5);
 
             Console.SetCursorPosition(0, 30);
-
-
         }
     }
 }

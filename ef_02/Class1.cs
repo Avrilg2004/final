@@ -35,7 +35,8 @@ namespace ef_02
 
                     if (i == index)
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(" " + submenu[i]);
                         Console.ResetColor();
                     }
@@ -62,7 +63,6 @@ namespace ef_02
                     LimpiarZonaInterna();
 
                     Console.SetCursorPosition(0, 10);
-                    menu.productos();
 
                     switch (index)
                     {
