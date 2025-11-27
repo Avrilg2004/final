@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\USER\\OneDrive\\Escritorio\\ef_2\\ef_02\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CEAA0265-A0A3-4028-A36C-24D6D53CB523}|ef_02.csproj|C:\\Users\\USER\\OneDrive\\Escritorio\\ef_2\\ef_02\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEAA0265-A0A3-4028-A36C-24D6D53CB523}|ef_02.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEAA0265-A0A3-4028-A36C-24D6D53CB523}|ef_02.csproj|c:\\users\\user\\onedrive\\escritorio\\ef_2\\ef_02\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEAA0265-A0A3-4028-A36C-24D6D53CB523}|ef_02.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEAA0265-A0A3-4028-A36C-24D6D53CB523}|ef_02.csproj|c:\\users\\user\\onedrive\\escritorio\\ef_2\\ef_02\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEAA0265-A0A3-4028-A36C-24D6D53CB523}|ef_02.csproj|solutionrelative:menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Escritorio\\ef_2\\ef_02\\Class1.cs",
+              "RelativeDocumentMoniker": "Class1.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Escritorio\\ef_2\\ef_02\\Class1.cs",
+              "RelativeToolTip": "Class1.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowEAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T03:24:31.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "menu.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Escritorio\\ef_2\\ef_02\\menu.cs",
+              "RelativeDocumentMoniker": "menu.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Escritorio\\ef_2\\ef_02\\menu.cs",
+              "RelativeToolTip": "menu.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAIAzwCgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T23:53:52.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Escritorio\\ef_2\\ef_02\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Escritorio\\ef_2\\ef_02\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAgwDoAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T03:23:48.869Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
