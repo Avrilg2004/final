@@ -106,6 +106,18 @@ namespace ef_02
                             break;
                         }
                     }
+
+                    if (codigo.Length != 11)
+                    {
+                        Console.SetCursorPosition(5, 11);
+                        Console.WriteLine("Error: El código debe tener exactamente 11 dígitos");
+                        Console.SetCursorPosition(5, 12);
+                        Console.WriteLine("Presione Enter para intentar de nuevo...");
+                        Console.ReadKey();
+                        valido = false;
+                        continue;
+                    }
+
                 } while (!valido);
 
                 // ====== NOMBRE (único) ======
@@ -1007,6 +1019,65 @@ namespace ef_02
             return true;
         }
 
+
+        public static void ListarProductos(int totalProductos) 
+        {
+            if (totalProductos == 0)
+            {
+                Console.SetCursorPosition(5, 6);
+                Console.Write("Actualmente no hay productos registrados");
+                Console.ReadKey();
+                return;
+            }
+            else
+            {
+                bool codigoProducto = false;
+
+                while (!codigoProducto)
+                {
+                    for (int y = 5; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+                    Console.SetCursorPosition(7, 6);
+                    Console.Write("LISTA DE PRODUCTOS");
+                    Console.SetCursorPosition(5, 7);
+                    Console.Write("Ingrese el CODIGO del producto: ");
+                    string CodigoProducto = Console.ReadLine();
+
+                    if (CodigoProducto.Length != 11)
+                    {
+                        Console.SetCursorPosition(5, 8);
+                        Console.WriteLine("El CODIGO debe tener 11 dígitos");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    for (int i = 0; i < codigos_producto.Length; i++)
+                    {
+                        if (codigos_producto[i] == CodigoProducto)
+                        {
+                            codigoProducto = true;
+                            Console.SetCursorPosition(5, 9);
+                            Console.Write($"Codigo del producto {i + 1}: {codigos_producto[i]}");
+                            Console.SetCursorPosition(5, 10);
+                            Console.Write($"Nombre del producto: {nombres_producto[i]}");
+                            Console.SetCursorPosition(5, 11);
+                            Console.Write($"Categoria del producto: {categorias_producto[i]}");
+                            Console.SetCursorPosition(5, 12);
+                            Console.Write($"Stock del producto: {stocks_producto[i]}");
+                            Console.SetCursorPosition(5, 13);
+                            Console.Write($"Precio del producto: {precios_producto[i]}");
+                            Console.SetCursorPosition(5, 14);
+                            Console.Write("Presione una tecla para continuar...");
+                            Console.ReadKey();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         public static void ListarClientes(int contadorClientes)
         {
 
@@ -1043,7 +1114,7 @@ namespace ef_02
                         continue;
                     }
 
-                    for (int i = 0; i < codigos.Length; i++)
+                    for (int i = 0; i < dni_cliente.Length; i++)
                     {
                         if (dni_cliente[i] == DNICliente)
                         {
@@ -1134,6 +1205,7 @@ namespace ef_02
                 }
             }
         }
+
 
         public static void provedor()
         {

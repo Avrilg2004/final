@@ -246,7 +246,7 @@ namespace ef_02
                     switch (index)
                     {
                         case 0:
-                            // PRODUCTOS
+                            menu.ListarProductos(menu.totalProductos);
                             break;
 
                         case 1:
@@ -258,7 +258,7 @@ namespace ef_02
                             break;
 
                         case 3:
-                            // PROVEEDORES
+                            
                             break;
 
                         case 4:

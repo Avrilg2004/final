@@ -14,3 +14,11 @@ C:\Users\USUARIO\Desktop\elena_la_crack\final\ef_02\obj\Debug\ef_02.exe.config
 C:\Users\USUARIO\Desktop\elena_la_crack\final\ef_02\obj\Debug\ef_02.csproj.CoreCompileInputs.cache
 C:\Users\USUARIO\Desktop\elena_la_crack\final\ef_02\obj\Debug\ef_02.exe
 C:\Users\USUARIO\Desktop\elena_la_crack\final\ef_02\obj\Debug\ef_02.pdb
+C:\Users\UPN\Desktop\final_uwus\final\ef_02\bin\Debug\ef_02.exe.config
+C:\Users\UPN\Desktop\final_uwus\final\ef_02\bin\Debug\ef_02.exe
+C:\Users\UPN\Desktop\final_uwus\final\ef_02\bin\Debug\ef_02.pdb
+C:\Users\UPN\Desktop\final_uwus\final\ef_02\obj\Debug\ef_02.csproj.AssemblyReference.cache
+C:\Users\UPN\Desktop\final_uwus\final\ef_02\obj\Debug\ef_02.exe.config
+C:\Users\UPN\Desktop\final_uwus\final\ef_02\obj\Debug\ef_02.csproj.CoreCompileInputs.cache
+C:\Users\UPN\Desktop\final_uwus\final\ef_02\obj\Debug\ef_02.exe
+C:\Users\UPN\Desktop\final_uwus\final\ef_02\obj\Debug\ef_02.pdb
