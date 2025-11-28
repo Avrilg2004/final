@@ -29,14 +29,12 @@ namespace ef_02
                 {
                     case 0:
                         Class1.SubmenuRegistrar();
-                        menu.productos();
                         break;
                     case 1:  
                         
                         break;
                     case 2:
                         Class1.SubmenuReportes();
-
                         break;
 
                     case 3:

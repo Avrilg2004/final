@@ -19,16 +19,16 @@ namespace ef_02
 
         public static void SubmenuRegistrar()
         {
-            string[] submenu = { "PRODUCTOS", "CLIENTES", "VENDEDORES", "PROVEEDORES", "VOLVER" };
+            string[] submenu = { "PRODUCTOS", "CLIENTES", "VENDEDORES", "PROVEEDORES" };
             int index = 0;
             ConsoleKeyInfo key;
 
-            do
+            while (true)
             {
-                // Limpia solo el interior, NO la pantalla completa
-                LimpiarZonaInterna();              
+                // Limpia solo el interior
+                LimpiarZonaInterna();
 
-                // Dibuja el submenu
+                // Mostrar submenu
                 for (int i = 0; i < submenu.Length; i++)
                 {
                     Console.SetCursorPosition(10, 6 + i);
@@ -46,22 +46,24 @@ namespace ef_02
                     }
                 }
 
+                // Leer tecla
                 key = Console.ReadKey(true);
 
+                // Flechas
                 if (key.Key == ConsoleKey.DownArrow)
                     index = (index + 1) % submenu.Length;
 
                 if (key.Key == ConsoleKey.UpArrow)
                     index = (index - 1 + submenu.Length) % submenu.Length;
 
+                // ✔ ESCAPE → SALIR DEL SUBMENÚ
+                if (key.Key == ConsoleKey.Escape)
+                    return;
+
+                // ENTER → seleccionar
                 if (key.Key == ConsoleKey.Enter)
                 {
-                    if (index == submenu.Length - 1)  // VOLVER
-                        return;
-
-                    // Cuando escoja un elemento
                     LimpiarZonaInterna();
-
                     Console.SetCursorPosition(0, 10);
 
                     switch (index)
@@ -79,15 +81,11 @@ namespace ef_02
                             break;
 
                         case 3:
-                            menu.proveedores();
+                            // proveededores función si la tienes
                             break;
-
-                        case 4: // VOLVER
-                            return;
                     }
                 }
-
-            } while (true);
+            }
         }
 
 
@@ -202,14 +200,15 @@ namespace ef_02
 
         public static void SubmenuReportes()
         {
-            string[] submenu = { "CLIENTES","PRODUCTOS", "VENDEDORES", "PROVEEDORES", "BOLETAS","FACTURAS","GUIAS","PROFORMAS" };
+            string[] submenu = { "PRODUCTOS", "CLIENTES", "VENDEDORES", "PROVEEDORES", "BOLETAS", "FACTURAS", "GUIAS", "PROFORMAS" };
             int index = 0;
             ConsoleKeyInfo key;
 
-            do
+            while (true)
             {
                 LimpiarZonaInterna();
 
+                // Dibuja el menú
                 for (int i = 0; i < submenu.Length; i++)
                 {
                     Console.SetCursorPosition(10, 6 + i);
@@ -229,6 +228,10 @@ namespace ef_02
 
                 key = Console.ReadKey(true);
 
+                // ← ESCAPE PARA VOLVER AL MENU PRINCIPAL
+                if (key.Key == ConsoleKey.Escape)
+                    return;
+
                 if (key.Key == ConsoleKey.DownArrow)
                     index = (index + 1) % submenu.Length;
 
@@ -237,47 +240,45 @@ namespace ef_02
 
                 if (key.Key == ConsoleKey.Enter)
                 {
-                    if (index == submenu.Length - 1)  // VOLVER
-                        return;
-
-                    // Cuando escoja un elemento
                     LimpiarZonaInterna();
-
                     Console.SetCursorPosition(0, 10);
 
                     switch (index)
                     {
                         case 0:
-                            menu.productos();
+                            // PRODUCTOS
                             break;
 
                         case 1:
-                            menu.clientes();
+                            menu.ListarClientes(menu.contadorClientes);
                             break;
 
                         case 2:
-                            menu.Listar();
+                            menu.ListarVendedores(menu.total);
                             break;
 
                         case 3:
-                            menu.proveedores();
+                            // PROVEEDORES
+                            break;
+
+                        case 4:
+                            // BOLETAS
                             break;
 
                         case 5:
-                            menu.proveedores();
+                            // FACTURAS
                             break;
 
                         case 6:
-                            menu.productos();
+                            // GUIAS
                             break;
 
                         case 7:
-                            menu.clientes();
+                            // PROFORMAS
                             break;
                     }
                 }
-
-            } while (true);
+            }
         }
     }
 }

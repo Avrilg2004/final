@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ef_02
 {
-    internal class menu
+    public class menu
     {
         // arreglos para clientes
         public static string[] nombre_cliente = new string[50];
@@ -15,14 +15,17 @@ namespace ef_02
         public static string[] telefono_cliente = new string[50];
         public static string[] email_cliente = new string[50];
         public static string[] direccion_cliente = new string[50];
+        public static int contadorClientes = 0;
 
         // Arreglos paralelos para almacenar datos( vendedores )
-        static string[] codigos = new string[50];
-        static string[] nombres = new string[50];
-        static string[] apellidos = new string[50];
-        static double[] sueldos = new double[50];
-        static string[] telefonos = new string[50];
-        static int total = 0;
+        public static string[] codigos = new string[50];
+        public static string[] nombres = new string[50];
+        public static string[] apellidos = new string[50];
+        public static double[] sueldos = new double[50];
+        public static string[] telefonos = new string[50];
+        public static int total = 0;
+
+
 
         //Arreglos para productos
         public static string[] codigos_producto = new string[50];
@@ -285,15 +288,16 @@ namespace ef_02
         }
 
 
-        public static void clientes()
+        public static int clientes()
         {
             
             string nombre, dni, apellidos, telefono, email, direccion,opcion;
             bool dnivalido,valido;
+            
 
             do
             {
-                do
+                do//nombres
                 {
                     for (int y = 5; y < 29; y++)
                     {
@@ -319,7 +323,7 @@ namespace ef_02
                 } while (!valido);
 
 
-                do
+                do//apellidos
                 {
                     for (int y = 5; y < 29; y++)
                     {
@@ -344,7 +348,7 @@ namespace ef_02
                 } while (!valido);
 
 
-                do
+                do//telefono
                 {
                     for (int y = 5; y < 29; y++)
                     {
@@ -398,7 +402,7 @@ namespace ef_02
 
 
                 bool emailValido;
-                do
+                do//email
                 {
                     emailValido = true;
 
@@ -427,7 +431,7 @@ namespace ef_02
                 } while (!emailValido);
 
                 bool direccionValida;
-                do
+                do//direccion
                 {
                     direccionValida = true;
                     for (int y = 5; y < 29; y++)
@@ -455,7 +459,7 @@ namespace ef_02
 
                 } while (!direccionValida);
 
-                do
+                do//DNI
                 {
                     dnivalido = true;
 
@@ -508,7 +512,7 @@ namespace ef_02
                         email_cliente[i] = email;
                         direccion_cliente[i] = direccion;
                         dni_cliente[i] = dni;
-
+                        contadorClientes++;
                         Console.SetCursorPosition(6, 9);
                         Console.Write("Datos guardados correctamente en la posición: " + i);
                         break;
@@ -530,8 +534,11 @@ namespace ef_02
                     Console.ReadLine();
                 }
             } while (opcion == "s");
+
+            return contadorClientes;
+
         }
-        public static void vendedores()
+        public static int vendedores()
         {
             string opcion;
             
@@ -553,7 +560,7 @@ namespace ef_02
                     }
                     Console.SetCursorPosition(5, 7);
                     Console.WriteLine("Error: Límite de 50 vendedores alcanzado");
-                    return;
+                    Console.ReadKey();
                 }
 
                 // Código (debe tener exactamente 11 dígitos y no repetido)
@@ -773,6 +780,7 @@ namespace ef_02
                 }
 
             } while (opcion == "s");
+            return total;
         }
 
         public static void Registrar()
@@ -999,63 +1007,130 @@ namespace ef_02
             return true;
         }
 
-        public static void Listar()
+        public static void ListarClientes(int contadorClientes)
         {
-            Console.SetCursorPosition(5, 6);
-            Console.WriteLine("LISTA DE VENDEDORES");
 
-            if (total == 0)
+            if (contadorClientes == 0)
             {
-                Console.SetCursorPosition(5, 7);
-                Console.Write("No hay vendedores registrados");
+                Console.SetCursorPosition(5, 6);
+                Console.Write("Actualmente no hay clientes registrados");
+                Console.ReadKey();
                 return;
+                
             }
-
-            for (int i = 0; i < total; i++)
+            else 
             {
-                Console.SetCursorPosition(5, 7);
-                Console.Write($"Vendedor {i + 1}:");
-                Console.SetCursorPosition(5, 8);
-                Console.Write($"Código: {codigos[i]}");
-                Console.SetCursorPosition(5, 9);
-                Console.Write($"Nombres: {nombres[i]}");
-                Console.SetCursorPosition(5, 10);
-                Console.Write($"Apellidos: {apellidos[i]}");
-                Console.SetCursorPosition(5, 11);
-                Console.Write($"Sueldo: ${sueldos[i]}");
-                Console.SetCursorPosition(5, 12);
-                Console.Write($"Teléfono: {telefonos[i]}");
+                bool DNIValido = false;
+
+                while (!DNIValido)
+                {
+                    for (int y = 5; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+                    Console.SetCursorPosition(7, 6);
+                    Console.Write("LISTA DE CLIENTES");
+                    Console.SetCursorPosition(5, 7);
+                    Console.Write("Ingrese el DNI del cliente: ");
+                    string DNICliente = Console.ReadLine();
+
+                    if (DNICliente.Length != 8)
+                    {
+                        Console.SetCursorPosition(5, 8);
+                        Console.WriteLine("El DNI debe tener 8 dígitos");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    for (int i = 0; i < codigos.Length; i++)
+                    {
+                        if (dni_cliente[i] == DNICliente)
+                        {
+                            DNIValido = true;
+                            Console.SetCursorPosition(5, 9);
+                            Console.Write($"Cliente {i + 1}:");
+                            Console.SetCursorPosition(5, 10);
+                            Console.Write($"DNI: {dni_cliente[i]}");
+                            Console.SetCursorPosition(5, 11);
+                            Console.Write($"Nombres: {nombre_cliente[i]}");
+                            Console.SetCursorPosition(5, 12);
+                            Console.Write($"Apellidos: {apellidos_cliente[i]}");
+                            Console.SetCursorPosition(5, 13);
+                            Console.Write($"Telefono: {telefono_cliente[i]}");
+                            Console.SetCursorPosition(5, 14);
+                            Console.Write($"Email: {email_cliente[i]}");
+                            Console.SetCursorPosition(5, 15);
+                            Console.Write($"Dirección: {direccion_cliente[i]}");
+                            Console.SetCursorPosition(5, 16);
+                            Console.Write("Presione una tecla para continuar...");
+                            Console.ReadKey();
+                            break;
+                        }
+                    }
+                }           
             }
+            
         }
 
-        public static void BuscarVendedor()
+        public static void ListarVendedores(int total)
         {
-            Console.SetCursorPosition(5, 6);
-            Console.Write("BUSCAR VENDEDOR");
-            Console.SetCursorPosition(5, 7);
-            Console.Write("Código a buscar: ");
-            string codigo = Console.ReadLine();
-
             if (total == 0)
             {
-                Console.SetCursorPosition(5, 8);
-                Console.Write("No hay vendedores registrados");
-            }
+                Console.SetCursorPosition(5, 6);
+                Console.Write("Actualmente no hay clientes registrados");
+                Console.ReadKey();
+                return;
 
-            for (int i = 0; i < total; i++)
+            }
+            else
             {
-                if (codigos[i] == codigo)
+                bool codigoValido = false;
+
+                while (!codigoValido)
                 {
-                    Console.SetCursorPosition(5, 8);
-                    Console.Write("Vendedor encontrado:");
-                    Console.SetCursorPosition(5, 9);
-                    Console.Write($"Código: {codigos[i]}");
-                    Console.SetCursorPosition(5, 10);
-                    Console.Write($"Nombre: {nombres[i]} {apellidos[i]}");
-                    Console.SetCursorPosition(5, 11);
-                    Console.Write($"Sueldo: {sueldos[i]}");
-                    Console.SetCursorPosition(5, 12);
-                    Console.Write($"Teléfono: {telefonos[i]}");
+                    for (int y = 5; y < 29; y++)
+                    {
+                        Console.SetCursorPosition(1, y);
+                        Console.Write(new string(' ', 101));
+                    }
+                    Console.SetCursorPosition(7, 6);
+                    Console.Write("LISTA DE VENDEDORES");
+                    Console.SetCursorPosition(5, 7);
+                    Console.Write("Ingrese el código del vendedor: ");
+                    string codigoVendedor = Console.ReadLine();
+
+                    if (codigoVendedor.Length != 11)
+                    {
+                        Console.SetCursorPosition(5, 8);
+                        Console.WriteLine("El código debe tener 11 dígitos");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    for (int i = 0; i < codigos.Length; i++)
+                    {
+                        if (codigos[i] == codigoVendedor)
+                        {
+                            codigoValido = true;
+                            Console.SetCursorPosition(5, 9);
+                            Console.Write($"Vendedor {i + 1}:");
+                            Console.SetCursorPosition(5, 10);
+                            Console.Write($"Código: {codigos[i]}");
+                            Console.SetCursorPosition(5, 11);
+                            Console.Write($"Nombres: {nombres[i]}");
+                            Console.SetCursorPosition(5, 12);
+                            Console.Write($"Apellidos: {apellidos[i]}");
+                            Console.SetCursorPosition(5, 13);
+                            Console.Write($"Sueldo: ${sueldos[i]}");
+                            Console.SetCursorPosition(5, 14);
+                            Console.Write($"Teléfono: {telefonos[i]}");
+                            Console.SetCursorPosition(5, 15);
+                            Console.Write("Presione una tecla para continuar...");
+                            Console.ReadKey();
+                            break;
+                        }
+                    }
                 }
             }
         }
